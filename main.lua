@@ -1,11 +1,18 @@
 local teststng = "dajs hdas hah ha dsh ashd ashd asd hasd hasd hasd hasd"
+local weights = {}
 function string.split(input, separator)
     separator = separator or "%s"
-    local i = 1
     for str in string.gmatch(input, '([^'..separator..']+)') do
-        i = i + 1
-        print(str)
+        if not weights[str] then
+            weights[str] = 1
+        else
+            weights[str] = weights[str] + 1
+        end
     end
 end
 
-print(string.split(teststng))
+string.split(teststng)
+
+for i,v in pairs(weights) do
+    print(v)
+end
