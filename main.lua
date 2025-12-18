@@ -2,25 +2,22 @@ local teststng = io.open("string.txt"):read("*all")
 local weights = {}
 function string.split(input, separator)
     separator = separator or "%s"
-    for str in string.gmatch(input, '([^'..separator..']+)') do
-        if not weights[str] then
-            weights[str] = 1
-        else
-            weights[str] = weights[str] + 1
+    local matched = string.gmatch(input, '([^'..separator..']+)')
+    local numerated = {}
+    local numeratedBigrams = {}
+    for str in matched do
+        table.insert(numerated, str)
+    end
+    for i,v in ipairs(numerated) do
+        if i ~= 1 then
+            table.insert(numeratedBigrams, numerated[i-1] .. " " .. (v or ""))
         end
     end
+    return numeratedBigrams
 end
 
-string.split(teststng)
+local numeratedBigrams = string.split(teststng)
 
-for i,v in pairs(weights) do
-    print(i .. ": " .. v)
-end
-
-io.write("Input a word.\n")
-local word = io.read()
-if weights[word] then
-    print("This word has a weight of " .. weights[word] .. ".")
-else
-    print("This word has not been weighted.")
+for i,v in pairs(numeratedBigrams) do
+    print(i .. ". " .. v)
 end
