@@ -15,7 +15,7 @@ function string.split(input, separator)
     end
     for i,v in ipairs(numeratedBigrams) do
         if not weights[v] then
-            weights[v] = 0
+            weights[v] = 1
         else
             weights[v] = weights[v] + 1
         end
