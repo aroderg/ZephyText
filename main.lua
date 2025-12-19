@@ -28,3 +28,21 @@ local weights = string.split(teststng)
 for i,v in pairs(weights) do
     print(i .. ": " .. v)
 end
+
+io.write("Input a word?\n")
+local inputword = io.read()
+local separator = "%s"
+
+for i,v in pairs(weights) do
+    local curMono = 1
+    local firstWord = ""
+    for word in string.gmatch(i, '([^%s]+)') do
+        if curMono == 1 then
+            firstWord = word
+        end
+        if curMono == 2 and word == inputword then
+            print(firstWord)
+        end
+        curMono = curMono + 1
+    end
+end
